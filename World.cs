@@ -65,7 +65,7 @@ namespace kum
 					{
 						if (sandbox[i, j].type == "sand")
 						{
-							Raylib.DrawPixel(i, j, Color.YELLOW);
+							Raylib.DrawRectangle(i * 2, j * 2, 2, 2, Color.YELLOW);
 						}
 					}
 					catch (System.NullReferenceException)
