@@ -26,22 +26,19 @@ namespace kum
 					world.Set(x, y + 1, this);
 					y++;
 				}
-				else
+				else if (world.Get(x - 1, y + 1).type == "air")
 				{
-					int i = Raylib.GetRandomValue(0, 1);
-
-					if (i == 0 && world.Get(x + 1, y).type == "air")
-					{
-						world.Set(x, y, new Tile(x, y, world, "air"));
-						world.Set(x + 1, y, this);
-						x++;
-					}
-					if (i == 1 && world.Get(x--, y).type == "air")
-					{
-						world.Set(x, y, new Tile(x, y, world, "air"));
-						world.Set(x - 1, y, this);
-						x--;
-					}
+					world.Set(x, y, new Tile(x, y, world, "air"));
+					world.Set(x - 1, y + 1, this);
+					x--;
+					y++;
+				}
+				else if (world.Get(x + 1, y + 1).type == "air")
+				{
+					world.Set(x, y, new Tile(x, y, world, "air"));
+					world.Set(x + 1, y + 1, this);
+					x++;
+					y++;
 				}
 			}
 		}

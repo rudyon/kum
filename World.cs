@@ -67,10 +67,6 @@ namespace kum
 						{
 							Raylib.DrawPixel(i, j, Color.YELLOW);
 						}
-						else if (sandbox[i, j].type == "air")
-						{
-							Raylib.DrawPixel(i, j, Color.BLACK);
-						}
 					}
 					catch (System.NullReferenceException)
 					{
@@ -89,7 +85,10 @@ namespace kum
 				{
 					try
 					{
-						sandbox[i, j].Update();
+						if (!(sandbox[i, j].type == "air"))
+						{
+							sandbox[i, j].Update();
+						}
 					}
 					catch (System.NullReferenceException)
 					{
