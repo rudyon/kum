@@ -65,7 +65,11 @@ namespace kum
 					{
 						if (sandbox[i, j].type == "sand")
 						{
-							Raylib.DrawRectangle(i * 2, j * 2, 2, 2, Color.YELLOW);
+							Raylib.DrawRectangle(i * 4, j * 4, 4, 4, Color.YELLOW);
+						}
+						else if (sandbox[i, j].type == "water")
+						{
+							Raylib.DrawRectangle(i * 4, j * 4, 4, 4, Color.BLUE);
 						}
 					}
 					catch (System.NullReferenceException)
@@ -85,9 +89,13 @@ namespace kum
 				{
 					try
 					{
-						if (!(sandbox[i, j].type == "air"))
+						if (!(sandbox[i, j].type == "air") && !(sandbox[i, j].updated))
 						{
 							sandbox[i, j].Update();
+						}
+						else if (sandbox[i, j].updated)
+						{
+							sandbox[i, j].updated = false;
 						}
 					}
 					catch (System.NullReferenceException)
