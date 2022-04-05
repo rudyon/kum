@@ -21,26 +21,26 @@ namespace kum
 		{
 			if (type == "sand")
 			{
-				if (world.Get(x, y + 1).type == "air")
+				if (CheckDown("air"))
 				{
 					world.Set(x, y, new Tile(x, y, world, "air"));
 					world.Set(x, y + 1, this);
 					y++;
 				}
-				else if (world.Get(x, y + 1).type == "water")
+				else if (CheckDown("water"))
 				{
 					world.Set(x, y, new Tile(x, y, world, "water"));
 					world.Set(x, y + 1, this);
 					y++;
 				}
-				else if (world.Get(x - 1, y + 1).type == "air")
+				else if (CheckDownLeft("air"))
 				{
 					world.Set(x, y, new Tile(x, y, world, "air"));
 					world.Set(x - 1, y + 1, this);
 					x--;
 					y++;
 				}
-				else if (world.Get(x + 1, y + 1).type == "air")
+				else if (CheckDownRight("air"))
 				{
 					world.Set(x, y, new Tile(x, y, world, "air"));
 					world.Set(x + 1, y + 1, this);
@@ -50,33 +50,33 @@ namespace kum
 			}
 			else if (type == "water")
 			{
-				if (world.Get(x, y + 1).type == "air")
+				if (CheckDown("air"))
 				{
 					world.Set(x, y, new Tile(x, y, world, "air"));
 					world.Set(x, y + 1, this);
 					y++;
 				}
-				else if (world.Get(x - 1, y + 1).type == "air")
+				else if (CheckDownLeft("air"))
 				{
 					world.Set(x, y, new Tile(x, y, world, "air"));
 					world.Set(x - 1, y + 1, this);
 					x--;
 					y++;
 				}
-				else if (world.Get(x + 1, y + 1).type == "air")
+				else if (CheckDownRight("air"))
 				{
 					world.Set(x, y, new Tile(x, y, world, "air"));
 					world.Set(x + 1, y + 1, this);
 					x++;
 					y++;
 				}
-				else if (world.Get(x - 1, y).type == "air")
+				else if (CheckLeft("air"))
 				{
 					world.Set(x, y, new Tile(x, y, world, "air"));
 					world.Set(x - 1, y, this);
 					x--;
 				}
-				else if (world.Get(x + 1, y).type == "air")
+				else if (CheckRight("air"))
 				{
 					world.Set(x, y, new Tile(x, y, world, "air"));
 					world.Set(x + 1, y, this);
@@ -85,6 +85,66 @@ namespace kum
 			}
 
 			updated = true;
+		}
+
+		bool CheckDown(string type)
+		{
+			if (world.Get(x, y + 1).type == type)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		bool CheckRight(string type)
+		{
+			if (world.Get(x + 1, y).type == type)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		bool CheckLeft(string type)
+		{
+			if (world.Get(x - 1, y).type == type)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		bool CheckDownRight(string type)
+		{
+			if (world.Get(x + 1, y + 1).type == type)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		bool CheckDownLeft(string type)
+		{
+			if (world.Get(x - 1, y + 1).type == type)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 	}
 }
