@@ -27,6 +27,12 @@ namespace kum
 					world.Set(x, y + 1, this);
 					y++;
 				}
+				else if (world.Get(x, y + 1).type == "water")
+				{
+					world.Set(x, y, new Tile(x, y, world, "water"));
+					world.Set(x, y + 1, this);
+					y++;
+				}
 				else if (world.Get(x - 1, y + 1).type == "air")
 				{
 					world.Set(x, y, new Tile(x, y, world, "air"));
