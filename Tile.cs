@@ -8,6 +8,7 @@ namespace kum
 		internal World world;
 		internal string type = "air";
 		internal bool updated = false;
+		internal Color color;
 
 		public Tile(int x, int y, World world, string type)
 		{
@@ -15,6 +16,7 @@ namespace kum
 			this.y = y;
 			this.world = world;
 			this.type = type;
+			this.color = SetColor(type);
 		}
 
 		internal void Update()
@@ -144,6 +146,19 @@ namespace kum
 			else
 			{
 				return false;
+			}
+		}
+
+		Color SetColor(string type)
+		{
+			switch (type)
+			{
+				case "sand":
+					return Color.YELLOW;
+				case "water":
+					return Color.BLUE;
+				default:
+					return Color.BLACK;
 			}
 		}
 	}

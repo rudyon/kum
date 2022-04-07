@@ -4,13 +4,14 @@ namespace kum
 {
 	internal class World
 	{
-		int width, height;
+		int width, height, resize_factor;
 		Tile[,]? sandbox;
 
-		public World(int width, int height)
+		public World(int width, int height, int resize_factor)
 		{
-			this.width = width;
-			this.height = height;
+			this.width = width / resize_factor;
+			this.height = height / resize_factor;
+			this.resize_factor = resize_factor;
 
 			sandbox = new Tile[width, height];
 
@@ -63,13 +64,9 @@ namespace kum
 				{
 					try
 					{
-						if (sandbox[i, j].type == "sand")
+						if (!(sandbox[i, j].type == "air"))
 						{
-							Raylib.DrawRectangle(i * 4, j * 4, 4, 4, Color.YELLOW);
-						}
-						else if (sandbox[i, j].type == "water")
-						{
-							Raylib.DrawRectangle(i * 4, j * 4, 4, 4, Color.BLUE);
+							Raylib.DrawRectangle(i * resize_factor, j * resize_factor, resize_factor, resize_factor, sandbox[i, j].color);
 						}
 					}
 					catch (System.NullReferenceException)
