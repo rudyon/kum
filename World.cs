@@ -56,6 +56,28 @@ namespace kum
 			}
 		}
 
+		internal void Paint(int x, int y, string type, int brush_size)
+		{
+			try
+			{
+				for (int i = 0; i < brush_size; i++)
+				{
+					for (int j = 0; j < brush_size; j++)
+					{
+						sandbox[x + i, y + j] = new Tile(x + i, y + j, this, type);
+					}
+				}
+			}
+			catch (System.NullReferenceException)
+			{
+
+			}
+			catch (IndexOutOfRangeException)
+			{
+
+			}
+		}
+
 		internal void Draw()
 		{
 			for (int i = 0; i < width; i++)

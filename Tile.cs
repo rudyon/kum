@@ -157,6 +157,8 @@ namespace kum
 					return Color.YELLOW;
 				case "water":
 					return Color.BLUE;
+				case "wood":
+					return Color.BROWN;
 				default:
 					return Color.BLACK;
 			}
