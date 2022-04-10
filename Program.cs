@@ -38,6 +38,10 @@ namespace kum
 				{
 					world.Paint(mouse_x, mouse_y, "wood", brush_size);
 				}
+				else if (Raylib.IsKeyDown(KeyboardKey.KEY_F))
+				{
+					world.Paint(mouse_x, mouse_y, "fire", brush_size);
+				}
 				else if (Raylib.IsKeyDown(KeyboardKey.KEY_Q))
 				{
 					world.Paint(mouse_x, mouse_y, "air", brush_size);

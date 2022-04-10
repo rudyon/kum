@@ -85,6 +85,94 @@ namespace kum
 					x++;
 				}
 			}
+			else if (type == "fire")
+			{
+				if (CheckUp("wood"))
+				{
+					world.Set(x, y, new Tile(x, y, world, "smoke"));
+					world.Set(x, y - 1, this);
+					y--;
+				}
+				else if (CheckUpLeft("wood"))
+				{
+					world.Set(x, y, new Tile(x, y, world, "smoke"));
+					world.Set(x - 1, y - 1, this);
+					x--;
+					y--;
+				}
+				else if (CheckUpRight("wood"))
+				{
+					world.Set(x, y, new Tile(x, y, world, "smoke"));
+					world.Set(x + 1, y - 1, this);
+					x++;
+					y--;
+				}
+				else if (CheckLeft("wood"))
+				{
+					world.Set(x, y, new Tile(x, y, world, "smoke"));
+					world.Set(x - 1, y, this);
+					x--;
+				}
+				else if (CheckRight("wood"))
+				{
+					world.Set(x, y, new Tile(x, y, world, "smoke"));
+					world.Set(x + 1, y, this);
+					x++;
+				}
+				else if (CheckDownLeft("wood"))
+				{
+					world.Set(x, y, new Tile(x, y, world, "smoke"));
+					world.Set(x - 1, y + 1, this);
+					x--;
+					y++;
+				}
+				else if (CheckDownRight("wood"))
+				{
+					world.Set(x, y, new Tile(x, y, world, "smoke"));
+					world.Set(x + 1, y + 1, this);
+					x++;
+					y++;
+				}
+				else
+				{
+					world.Set(x, y, new Tile(x, y, world, "smoke"));
+				}
+			}
+			else if (type == "smoke")
+			{
+				if (CheckUp("air"))
+				{
+					world.Set(x, y, new Tile(x, y, world, "air"));
+					world.Set(x, y - 1, this);
+					y--;
+				}
+				else if (CheckUpLeft("air"))
+				{
+					world.Set(x, y, new Tile(x, y, world, "air"));
+					world.Set(x - 1, y - 1, this);
+					x--;
+					y--;
+				}
+				else if (CheckUpRight("air"))
+				{
+					world.Set(x, y, new Tile(x, y, world, "air"));
+					world.Set(x + 1, y - 1, this);
+					x++;
+					y--;
+				}
+				else if (CheckLeft("air"))
+				{
+					world.Set(x, y, new Tile(x, y, world, "air"));
+					world.Set(x - 1, y, this);
+					x--;
+				}
+				else if (CheckRight("air"))
+				{
+					world.Set(x, y, new Tile(x, y, world, "air"));
+					world.Set(x + 1, y, this);
+					x++;
+				}
+			}
 
 			updated = true;
 		}
@@ -92,6 +180,18 @@ namespace kum
 		bool CheckDown(string type)
 		{
 			if (world.Get(x, y + 1).type == type)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		bool CheckUp(string type)
+		{
+			if (world.Get(x, y - 1).type == type)
 			{
 				return true;
 			}
@@ -149,6 +249,30 @@ namespace kum
 			}
 		}
 
+		bool CheckUpRight(string type)
+		{
+			if (world.Get(x + 1, y - 1).type == type)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		bool CheckUpLeft(string type)
+		{
+			if (world.Get(x - 1, y - 1).type == type)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
 		Color SetColor(string type)
 		{
 			switch (type)
@@ -159,6 +283,10 @@ namespace kum
 					return Color.BLUE;
 				case "wood":
 					return Color.BROWN;
+				case "fire":
+					return Color.RED;
+				case "smoke":
+					return Color.GRAY;
 				default:
 					return Color.BLACK;
 			}
