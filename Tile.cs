@@ -284,7 +284,14 @@ namespace kum
 				case "wood":
 					return Color.BROWN;
 				case "fire":
-					return Color.RED;
+					if (Raylib.GetRandomValue(0, 1) == 0)
+					{
+						return Color.RED;
+					}
+					else
+					{
+						return Color.ORANGE;
+					}
 				case "smoke":
 					return Color.GRAY;
 				default:
