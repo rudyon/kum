@@ -133,7 +133,7 @@ namespace kum
 					x++;
 					y++;
 				}
-				else
+				else if (Raylib.GetRandomValue(0, 1) == 0)
 				{
 					world.Set(x, y, new Tile(x, y, world, "smoke"));
 				}
