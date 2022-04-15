@@ -12,6 +12,7 @@ namespace kum
 			height = 600;
 			resize_factor = 4;
 			brush_size = 4;
+			string brush_type = "sand";
 
 			Raylib.InitWindow(width, height, "kum");
 			Raylib.SetTargetFPS(60);
@@ -28,23 +29,29 @@ namespace kum
 
 				if (Raylib.IsMouseButtonDown(MouseButton.MOUSE_BUTTON_LEFT))
 				{
-					world.Paint(mouse_x, mouse_y, "sand", brush_size);
+					world.Paint(mouse_x, mouse_y, brush_type, brush_size);
 				}
-				else if (Raylib.IsMouseButtonDown(MouseButton.MOUSE_BUTTON_RIGHT))
+
+				else if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
 				{
-					world.Paint(mouse_x, mouse_y, "water", brush_size);
-				}
-				else if (Raylib.IsKeyDown(KeyboardKey.KEY_A))
-				{
-					world.Paint(mouse_x, mouse_y, "wood", brush_size);
-				}
-				else if (Raylib.IsKeyDown(KeyboardKey.KEY_F))
-				{
-					world.Paint(mouse_x, mouse_y, "fire", brush_size);
-				}
-				else if (Raylib.IsKeyDown(KeyboardKey.KEY_Q))
-				{
-					world.Paint(mouse_x, mouse_y, "air", brush_size);
+					switch (brush_type)
+					{
+						case "sand":
+							brush_type = "water";
+							break;
+						case "water":
+							brush_type = "wood";
+							break;
+						case "wood":
+							brush_type = "fire";
+							break;
+						case "fire":
+							brush_type = "air";
+							break;
+						case "air":
+							brush_type = "sand";
+							break;
+					}
 				}
 
 				if (Raylib.GetMouseWheelMove() != 0)
@@ -61,6 +68,8 @@ namespace kum
 				Raylib.ClearBackground(Color.BLACK);
 
 				world.Draw();
+				Raylib.DrawText(brush_type, 4, 4, 24, Color.WHITE);
+				Raylib.DrawText("<space> to switch", 4, 32, 16, Color.WHITE);
 				Raylib.DrawRectangleLines(mouse_x * resize_factor, mouse_y * resize_factor, brush_size * resize_factor, brush_size * resize_factor, Color.WHITE);
 
 				Raylib.EndDrawing();
