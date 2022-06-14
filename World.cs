@@ -36,7 +36,7 @@ namespace kum
 			}
 			catch (IndexOutOfRangeException)
 			{
-				return null;
+				return new Tile(x, y, this, "sand");
 			}
 		}
 
