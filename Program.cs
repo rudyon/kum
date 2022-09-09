@@ -10,8 +10,8 @@ namespace kum
 			int width, height, resize_factor, mouse_x, mouse_y, brush_size;
 			width = 600;
 			height = 600;
-			resize_factor = 4;
-			brush_size = 4;
+			resize_factor = 2;
+			brush_size = 2;
 			string brush_type = "sand";
 
 			Raylib.InitWindow(width, height, "kum");

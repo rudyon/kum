@@ -6,7 +6,7 @@ namespace kum
 	{
 		internal int x, y;
 		internal World world;
-		internal string type = "air";
+		internal string type = "air"; // TODO: Make this an enum.
 		internal bool updated = false;
 		internal Color color;
 
@@ -87,55 +87,56 @@ namespace kum
 			}
 			else if (type == "fire")
 			{
-				if (CheckUp("wood"))
+				if (Flammability(world.Get(x, y - 1).type))
 				{
-					world.Set(x, y, new Tile(x, y, world, "smoke"));
 					world.Set(x, y - 1, this);
 					y--;
 				}
-				else if (CheckUpLeft("wood"))
+				else if (Flammability(world.Get(x - 1, y - 1).type))
 				{
-					world.Set(x, y, new Tile(x, y, world, "smoke"));
 					world.Set(x - 1, y - 1, this);
 					x--;
 					y--;
 				}
-				else if (CheckUpRight("wood"))
+				else if (Flammability(world.Get(x + 1, y - 1).type))
 				{
-					world.Set(x, y, new Tile(x, y, world, "smoke"));
 					world.Set(x + 1, y - 1, this);
 					x++;
 					y--;
 				}
-				else if (CheckLeft("wood"))
+				else if (Flammability(world.Get(x - 1, y).type))
 				{
-					world.Set(x, y, new Tile(x, y, world, "smoke"));
 					world.Set(x - 1, y, this);
 					x--;
 				}
-				else if (CheckRight("wood"))
+				else if (Flammability(world.Get(x + 1, y).type))
 				{
-					world.Set(x, y, new Tile(x, y, world, "smoke"));
+					world.Set(x, y, new Tile(x, y, world, "air"));
 					world.Set(x + 1, y, this);
 					x++;
 				}
-				else if (CheckDownLeft("wood"))
+				
+				if (Flammability(world.Get(x - 1, y + 1).type))
 				{
-					world.Set(x, y, new Tile(x, y, world, "smoke"));
+
 					world.Set(x - 1, y + 1, this);
 					x--;
 					y++;
 				}
-				else if (CheckDownRight("wood"))
+				else if (Flammability(world.Get(x + 1, y + 1).type))
 				{
-					world.Set(x, y, new Tile(x, y, world, "smoke"));
 					world.Set(x + 1, y + 1, this);
 					x++;
 					y++;
 				}
-				else if (Raylib.GetRandomValue(0, 1) == 0)
+				
+				if (Raylib.GetRandomValue(0, 1) == 0)
 				{
 					world.Set(x, y, new Tile(x, y, world, "smoke"));
+				}
+				else
+				{
+					world.Set(x, y, new Tile(x, y, world, "air"));
 				}
 			}
 			else if (type == "smoke")
@@ -296,6 +297,34 @@ namespace kum
 					return Color.GRAY;
 				default:
 					return Color.BLACK;
+			}
+		}
+
+		bool Flammability(string type)
+		{
+			int rng = Raylib.GetRandomValue(0, 100);
+
+			switch (type)
+			{
+				case "sand":
+					return false;
+				case "water":
+					return false;
+				case "wood":
+					if (rng < 40)
+					{
+						return true;
+					}
+					else
+					{
+						return false;
+					}
+				case "fire":
+					return false;
+				case "smoke":
+					return false;
+				default:
+					return false;
 			}
 		}
 	}
